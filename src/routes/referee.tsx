@@ -1,5 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { useMemo, useState } from "react";
+import { useEffect, useState } from "react";
 import { AppShell } from "@/components/AppShell";
 import {
   Goal, HandMetal, Square, ArrowLeftRight, Clock, X, Check, Star, Share2,
@@ -58,7 +58,7 @@ function RefereePanel() {
   const [submitted, setSubmitted] = useState(false);
 
   // Tick clock
-  useMemo(() => {
+  useEffect(() => {
     if (!started || ended) return;
     const i = setInterval(() => setTick((t) => t + 1), 1000);
     return () => clearInterval(i);
