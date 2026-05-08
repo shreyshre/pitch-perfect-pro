@@ -24,10 +24,14 @@ export const recentMatches = [
   { id: "m5", opponent: "Andheri All-Stars", score: "2-2", result: "D", date: "Apr 20", rating: 7.8, goals: 1, assists: 0 },
 ];
 
+const TIMES = ["06:00", "07:00", "08:00", "16:00", "17:00", "18:00", "19:00", "20:00", "21:00", "22:00"];
+const buildSlots = (taken: string[]) =>
+  TIMES.map((time) => ({ time, available: !taken.includes(time) }));
+
 export const nearbyTurfs = [
-  { id: "t1", name: "Kickoff Arena", area: "Bandra West", price: 1200, rating: 4.8, slots: 6, image: "https://images.unsplash.com/photo-1551958219-acbc608c6377?w=600&h=400&fit=crop" },
-  { id: "t2", name: "The Box Powai", area: "Powai", price: 900, rating: 4.6, slots: 3, image: "https://images.unsplash.com/photo-1459865264687-595d652de67e?w=600&h=400&fit=crop" },
-  { id: "t3", name: "Turf 11", area: "Andheri East", price: 1500, rating: 4.9, slots: 8, image: "https://images.unsplash.com/photo-1487466365202-1afdb86c764e?w=600&h=400&fit=crop" },
+  { id: "t1", name: "Kickoff Arena", area: "Bandra West", price: 1200, rating: 4.8, x: 28, y: 32, image: "https://images.unsplash.com/photo-1551958219-acbc608c6377?w=600&h=400&fit=crop", slots: buildSlots(["07:00", "17:00", "20:00"]) },
+  { id: "t2", name: "The Box Powai", area: "Powai", price: 900, rating: 4.6, x: 68, y: 22, image: "https://images.unsplash.com/photo-1459865264687-595d652de67e?w=600&h=400&fit=crop", slots: buildSlots(["06:00", "08:00", "16:00", "18:00", "19:00", "21:00", "22:00"]) },
+  { id: "t3", name: "Turf 11", area: "Andheri East", price: 1500, rating: 4.9, x: 45, y: 62, image: "https://images.unsplash.com/photo-1487466365202-1afdb86c764e?w=600&h=400&fit=crop", slots: buildSlots(["20:00"]) },
 ];
 
 export const upcomingMatches = [
