@@ -1,5 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { User, Whistle, Video } from "lucide-react";
+import { User, Flag, Video } from "lucide-react";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -13,7 +13,7 @@ export const Route = createFileRoute("/")({
 
 const roles = [
   { id: "player", label: "Player", desc: "Track stats, join clubs, book turfs", Icon: User },
-  { id: "referee", label: "Referee", desc: "Run live matches, rate performances", Icon: Whistle },
+  { id: "referee", label: "Referee", desc: "Run live matches, rate performances", Icon: Flag },
   { id: "cameraman", label: "Cameraman", desc: "Get booked, upload highlights", Icon: Video },
 ] as const;
 
