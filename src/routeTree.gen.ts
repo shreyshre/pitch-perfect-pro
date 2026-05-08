@@ -10,6 +10,7 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as TournamentsRouteImport } from './routes/tournaments'
+import { Route as RefereeRouteImport } from './routes/referee'
 import { Route as ProfileRouteImport } from './routes/profile'
 import { Route as HomeRouteImport } from './routes/home'
 import { Route as ClubRouteImport } from './routes/club'
@@ -19,6 +20,11 @@ import { Route as IndexRouteImport } from './routes/index'
 const TournamentsRoute = TournamentsRouteImport.update({
   id: '/tournaments',
   path: '/tournaments',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const RefereeRoute = RefereeRouteImport.update({
+  id: '/referee',
+  path: '/referee',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ProfileRoute = ProfileRouteImport.update({
@@ -53,6 +59,7 @@ export interface FileRoutesByFullPath {
   '/club': typeof ClubRoute
   '/home': typeof HomeRoute
   '/profile': typeof ProfileRoute
+  '/referee': typeof RefereeRoute
   '/tournaments': typeof TournamentsRoute
 }
 export interface FileRoutesByTo {
@@ -61,6 +68,7 @@ export interface FileRoutesByTo {
   '/club': typeof ClubRoute
   '/home': typeof HomeRoute
   '/profile': typeof ProfileRoute
+  '/referee': typeof RefereeRoute
   '/tournaments': typeof TournamentsRoute
 }
 export interface FileRoutesById {
@@ -70,6 +78,7 @@ export interface FileRoutesById {
   '/club': typeof ClubRoute
   '/home': typeof HomeRoute
   '/profile': typeof ProfileRoute
+  '/referee': typeof RefereeRoute
   '/tournaments': typeof TournamentsRoute
 }
 export interface FileRouteTypes {
@@ -80,9 +89,17 @@ export interface FileRouteTypes {
     | '/club'
     | '/home'
     | '/profile'
+    | '/referee'
     | '/tournaments'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/book-turf' | '/club' | '/home' | '/profile' | '/tournaments'
+  to:
+    | '/'
+    | '/book-turf'
+    | '/club'
+    | '/home'
+    | '/profile'
+    | '/referee'
+    | '/tournaments'
   id:
     | '__root__'
     | '/'
@@ -90,6 +107,7 @@ export interface FileRouteTypes {
     | '/club'
     | '/home'
     | '/profile'
+    | '/referee'
     | '/tournaments'
   fileRoutesById: FileRoutesById
 }
@@ -99,6 +117,7 @@ export interface RootRouteChildren {
   ClubRoute: typeof ClubRoute
   HomeRoute: typeof HomeRoute
   ProfileRoute: typeof ProfileRoute
+  RefereeRoute: typeof RefereeRoute
   TournamentsRoute: typeof TournamentsRoute
 }
 
@@ -109,6 +128,13 @@ declare module '@tanstack/react-router' {
       path: '/tournaments'
       fullPath: '/tournaments'
       preLoaderRoute: typeof TournamentsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/referee': {
+      id: '/referee'
+      path: '/referee'
+      fullPath: '/referee'
+      preLoaderRoute: typeof RefereeRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/profile': {
@@ -155,8 +181,19 @@ const rootRouteChildren: RootRouteChildren = {
   ClubRoute: ClubRoute,
   HomeRoute: HomeRoute,
   ProfileRoute: ProfileRoute,
+  RefereeRoute: RefereeRoute,
   TournamentsRoute: TournamentsRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
+
+import type { getRouter } from './router.tsx'
+import type { startInstance } from './start.ts'
+declare module '@tanstack/react-start' {
+  interface Register {
+    ssr: true
+    router: Awaited<ReturnType<typeof getRouter>>
+    config: Awaited<ReturnType<typeof startInstance.getOptions>>
+  }
+}
