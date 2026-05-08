@@ -39,7 +39,7 @@ function HomeFeed() {
               <div className="flex items-center justify-between p-3">
                 <div>
                   <p className="text-base font-bold">₹{t.price}<span className="text-xs font-normal text-muted-foreground">/hr</span></p>
-                  <p className="text-[11px] text-muted-foreground">{t.slots} slots open</p>
+                  <p className="text-[11px] text-muted-foreground">{t.slots.filter(s => s.available).length} slots open</p>
                 </div>
                 <Link
                   to="/book-turf"
