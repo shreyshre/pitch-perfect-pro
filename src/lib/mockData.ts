@@ -1,28 +1,4 @@
-export const currentPlayer = {
-  id: "p1",
-  name: "Arjun Mehta",
-  age: 24,
-  city: "Mumbai",
-  position: "Midfielder",
-  rating: 8.4,
-  goals: 47,
-  assists: 32,
-  matchesPlayed: 86,
-  cleanSheets: 0,
-  yellowCards: 4,
-  redCards: 0,
-  photo: "https://images.unsplash.com/photo-1633332755192-727a05c4013d?w=400&h=400&fit=crop",
-  club: { name: "Coastal FC", badge: "🛡️" },
-  bio: "Box-to-box midfielder. Left foot. Loves a long-range strike.",
-};
-
-export const recentMatches = [
-  { id: "m1", opponent: "Eastside United", score: "3-2", result: "W", date: "May 5", rating: 8.7, goals: 1, assists: 1 },
-  { id: "m2", opponent: "Marine Drive XI", score: "1-1", result: "D", date: "May 2", rating: 7.5, goals: 0, assists: 0 },
-  { id: "m3", opponent: "Bandra Boys", score: "4-0", result: "W", date: "Apr 28", rating: 9.1, goals: 2, assists: 1 },
-  { id: "m4", opponent: "Powai Strikers", score: "0-2", result: "L", date: "Apr 24", rating: 6.4, goals: 0, assists: 0 },
-  { id: "m5", opponent: "Andheri All-Stars", score: "2-2", result: "D", date: "Apr 20", rating: 7.8, goals: 1, assists: 0 },
-];
+// Turf, match, and tournament data only — no hardcoded player profile
 
 const TIMES = ["06:00", "07:00", "08:00", "16:00", "17:00", "18:00", "19:00", "20:00", "21:00", "22:00"];
 const buildSlots = (taken: string[]) =>

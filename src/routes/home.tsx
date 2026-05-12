@@ -1,16 +1,40 @@
-import { createFileRoute, Link } from "@tanstack/react-router";
+Home · TSX
+Copy
+
+import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
+import { useEffect } from "react";
 import { AppShell } from "@/components/AppShell";
 import { nearbyTurfs, upcomingMatches, activeTournaments } from "@/lib/mockData";
-import { MapPin, Star, Clock, Calendar, Trophy, ChevronRight } from "lucide-react";
-
+import { MapPin, Star, Clock, Trophy, ChevronRight } from "lucide-react";
+import { useAuth } from "@/hooks/useAuth";
+ 
 export const Route = createFileRoute("/home")({
   head: () => ({ meta: [{ title: "Home — PitchSide" }] }),
   component: HomeFeed,
 });
-
+ 
+function getGreeting() {
+  const h = new Date().getHours();
+  if (h < 12) return "Good morning";
+  if (h < 17) return "Good afternoon";
+  return "Good evening";
+}
+ 
 function HomeFeed() {
+  const { user } = useAuth();
+  const navigate = useNavigate();
+ 
+  useEffect(() => {
+    if (!user) navigate({ to: "/" });
+  }, [user]);
+ 
+  if (!user) return null;
+ 
+  const greeting = user.name ? `${getGreeting()}, ${user.name.split(" ")[0]}` : getGreeting();
+  const subtitle = user.city ? `${user.city} · Today` : "Today";
+ 
   return (
-    <AppShell subtitle="Mumbai · Today" title="Good evening, Arjun">
+    <AppShell subtitle={subtitle} title={greeting}>
       {/* Nearby turfs */}
       <section className="mt-2">
         <SectionHeader title="Turfs available today" to="/book-turf" />
@@ -52,7 +76,7 @@ function HomeFeed() {
           ))}
         </div>
       </section>
-
+ 
       {/* Upcoming matches */}
       <section className="mt-8">
         <SectionHeader title="Upcoming matches" />
@@ -78,7 +102,7 @@ function HomeFeed() {
           ))}
         </div>
       </section>
-
+ 
       {/* Tournaments */}
       <section className="mt-8">
         <SectionHeader title="Active tournaments" to="/tournaments" />
@@ -108,7 +132,7 @@ function HomeFeed() {
     </AppShell>
   );
 }
-
+ 
 function SectionHeader({ title, to }: { title: string; to?: string }) {
   return (
     <div className="flex items-end justify-between">
