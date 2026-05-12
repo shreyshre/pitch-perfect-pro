@@ -1,4 +1,4 @@
-Home · TSX
+Home  TSX
 Copy
 
 import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
@@ -31,7 +31,7 @@ function HomeFeed() {
   if (!user) return null;
  
   const greeting = user.name ? `${getGreeting()}, ${user.name.split(" ")[0]}` : getGreeting();
-  const subtitle = user.city ? `${user.city} · Today` : "Today";
+  const subtitle = user.city ? `${user.city}  Today` : "Today";
  
   return (
     <AppShell subtitle={subtitle} title={greeting}>
@@ -119,7 +119,7 @@ function HomeFeed() {
               </div>
               <div className="flex-1">
                 <p className="text-sm font-bold">{t.name}</p>
-                <p className="text-xs text-muted-foreground">{t.format} · {t.teams} teams · {t.prize}</p>
+                <p className="text-xs text-muted-foreground">{t.format}  {t.teams} teams  {t.prize}</p>
               </div>
               <div className="text-right">
                 <p className="text-[10px] font-semibold uppercase tracking-wider text-primary">{t.status}</p>
