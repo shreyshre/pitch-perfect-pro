@@ -1,6 +1,3 @@
-Home  TSX
-Copy
-
 import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
 import { useEffect } from "react";
 import { AppShell } from "@/components/AppShell";
